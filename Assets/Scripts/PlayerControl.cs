@@ -65,6 +65,8 @@ public class PlayerControl : MonoBehaviour
     private float dashTime;
     private bool isDashing = false;
     private bool dashRequest;
+    [SerializeField]private float restTimeForDashInput;
+    private float restTimeForDash;
 
     //icing
     bool isIcing;
@@ -81,6 +83,7 @@ public class PlayerControl : MonoBehaviour
         trailscript = trailJump.GetComponent<boxtrail>();
         trailscript.enabled = false;
         dashTime = startDashTime;
+        restTimeForDash = restTimeForDashInput;
     }
 
     void Update()
@@ -153,12 +156,22 @@ public class PlayerControl : MonoBehaviour
         moveInputVertical = Input.GetAxis("Vertical");
         //Down/Jump////Dash>
         //DashRequest
-        if (moveInputVertical < 0 && Input.GetKeyDown(KeyCode.Space)&&extraDash>0)
-        {
-            dashRequest = true;
-        }
-
         
+
+        if (restTimeForDash <= 0)
+        {
+            if (moveInputVertical < 0 && Input.GetKeyDown(KeyCode.Space) && extraDash > 0)
+            {
+                
+                dashRequest = true;
+                restTimeForDash = restTimeForDashInput;
+            }
+            
+        }
+        else
+        {
+            restTimeForDash -= Time.deltaTime;
+        }
     
   
        
@@ -266,7 +279,8 @@ public class PlayerControl : MonoBehaviour
         if (isGrounded)
         {
             extraJump = extrajumpinput;
-            extraDash = extraDashInput;
+            
+             extraDash = extraDashInput;
           //  isdoubleJump = false;
             trailscript.enabled = false;
 
