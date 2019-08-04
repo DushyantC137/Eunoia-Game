@@ -3,12 +3,12 @@
 public class TimeManagerScript : MonoBehaviour {
     public float slowDownFactor=0.05f;
     public float slowdownLength = 1f;
-    public float pauseLength=0.5f;
-    private float x;
+
+
 
     void Start()
     {
-        x = pauseLength;
+  
     }
     void Update()
     {
