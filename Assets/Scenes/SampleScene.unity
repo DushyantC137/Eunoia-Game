@@ -494,6 +494,7 @@ MonoBehaviour:
   linePrefab: {fileID: 1627550546650598, guid: 8823027e1830f084ea899d20bb77066e, type: 2}
   BouncelinePrefab: {fileID: 1496615306765678, guid: 8986b1c02b8473a40946bfd22f286cf9,
     type: 2}
+  isGrounded: 0
   groundCheck: {fileID: 1455700629}
   checkX: 0.24
   checkY: 0.09
@@ -538,19 +539,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 12032
   extrajumpinput: 1
+  extraDashInput: 1
   moving: 0
   animP: {fileID: 1584857741}
   isDrop: 0
   source: {fileID: 919321712}
   jumpSound: {fileID: 8300000, guid: 37a2f64eaf2c4eb4d8ae6bcc133c36cb, type: 3}
   landingSound: {fileID: 8300000, guid: 79e7d324bb2c5fb49bc710b9ae542a36, type: 3}
-  jumpspark: {fileID: 1944233653446190, guid: 9f1a086f1add7b64bbee38279ceecc72, type: 2}
+  jumpspark: {fileID: 1816993154026120, guid: bcca16a5628126e45b9134e5799710ad, type: 2}
   trailJump: {fileID: 774630249}
   isSparkEnable: 1
   isTrailEnable: 0
   extraForce: 0.8
-  dashForce: 50
+  dashForce: 30
   startDashTime: 0.1
+  restTimeForDashInput: 1
 --- !u!114 &750088714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac060f95a4510814e83d1bf3ac14bfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeBtwSpawns: 0.09
+  startTimeBtwSpawns: 0.001
   echoBox: {fileID: 1331241074948900, guid: 68f38219bc9ddcf4f81fc2d413a5e733, type: 2}
   player: {fileID: 1584857736}
 --- !u!1 &919321711
@@ -1136,7 +1139,7 @@ GameObject:
   m_Layer: 11
   m_Name: Brush
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

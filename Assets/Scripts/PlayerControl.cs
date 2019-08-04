@@ -46,7 +46,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private AudioSource source;
     public AudioClip jumpSound;
-    public AudioClip landingSound;
+    public AudioClip dashSound;
+    public AudioClip dropSound;
 
     //trail
     public GameObject jumpspark;
@@ -70,11 +71,12 @@ public class PlayerControl : MonoBehaviour
 
     //icing
     bool isIcing;
+    public TimeManagerScript timeManager;
 
     // Use this for initialization
     void Start()
     {
-        facingRight = true;
+        facingRight = false;
         moving = true;
         rb = player.GetComponent<Rigidbody2D>();
         extraJump = extrajumpinput;
@@ -117,17 +119,7 @@ public class PlayerControl : MonoBehaviour
         else
             moving = false;
 
-        //NormalJump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (extraJump > 0)
-            {
-                jumpRequest = true;
-            }
-            animP.SetTrigger("jump");
-            //Debug.Log("Jump");
-            
-        }
+       
         //IS THE OBJECT GROUNDED
         groundObjectCollider = Physics2D.OverlapBox(groundCheck.position, new Vector2(checkX, checkY), 0, whatIsGround);
         if (groundObjectCollider)
@@ -143,28 +135,55 @@ public class PlayerControl : MonoBehaviour
         moveInputHorrizontal = Input.GetAxis("Horizontal");
         moveV = moveInputHorrizontal * speed * Time.deltaTime;
         //Facing Right
-       if(!facingRight && moveInputHorrizontal > 0)
+        if (moveInputHorrizontal > 0.1f)
         {
-            Flip();
-        }
-        else
-        {
-            if (facingRight && moveInputHorrizontal < 0)
+            if (!facingRight)
+            {
+   
                 Flip();
+            }
+        }
+        if(moveInputHorrizontal<-0.1f)
+        {
+            if (facingRight )
+                Flip();
+          
         }
 
         moveInputVertical = Input.GetAxis("Vertical");
-        //Down/Jump////Dash>
+        //Jump
+        //NormalJump
+        if (Input.GetKeyDown(KeyCode.Space) && moveInputVertical > -0.4f)
+        {
+            if (extraJump > 0)
+            {
+                jumpRequest = true;
+            }
+            animP.SetTrigger("jump");
+            //Debug.Log("Jump");
+
+        }
+
+        //Down/Jump////Dash>][][][][][][][][][]][-------------]
         //DashRequest
-        
+
 
         if (restTimeForDash <= 0)
         {
-            if (moveInputVertical < 0 && Input.GetKeyDown(KeyCode.Space) && extraDash > 0)
+            if (moveInputVertical < -0.4f && Input.GetKeyDown(KeyCode.Space) && extraDash > 0)
             {
                 
-                dashRequest = true;
+                
                 restTimeForDash = restTimeForDashInput;
+                animP.SetTrigger("dash");
+                trailscript.enabled = true;
+                CameraShaker.Instance.ShakeOnce(4f, 7f, 0.2f, 0.4f);
+                dashRequest = true;
+                timeManager.DoSlowMotion();
+                source.clip = dashSound;
+                source.Play();
+                Debug.Log("Dash");
+
             }
             
         }
@@ -260,13 +279,17 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                trailscript.enabled = true;
+                
+                
                 dashTime -= Time.fixedDeltaTime ;
                 isDashing = true;
                 if(facingRight)
                     rb.velocity = Vector2.right * dashForce;
                 else
                     rb.velocity = Vector2.left * dashForce;
+                
+                //timeManager.DoSlowMotion();
+                
 
             }
         }
@@ -279,16 +302,16 @@ public class PlayerControl : MonoBehaviour
         if (isGrounded)
         {
             extraJump = extrajumpinput;
-            
+            if(restTimeForDash<=0)
              extraDash = extraDashInput;
           //  isdoubleJump = false;
-            trailscript.enabled = false;
+            //trailscript.enabled = false;
 
             if (isDrop)
             {
                 if (!isIcing)
                 {
-                    source.clip = landingSound;
+                    source.clip = dropSound;
                     source.Play();
                 }
 

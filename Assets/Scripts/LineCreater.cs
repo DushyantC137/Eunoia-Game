@@ -12,6 +12,7 @@ public class LineCreater : MonoBehaviour {
     Line activeLine1;
     Line activeLine2;
     Rigidbody2D rb;
+    [SerializeField]
     private bool isGrounded;
     public Transform groundCheck;
     public float checkX, checkY;
