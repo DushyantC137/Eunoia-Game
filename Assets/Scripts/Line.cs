@@ -7,10 +7,12 @@ public class Line : MonoBehaviour
     private EdgeCollider2D edgecol;
     private LineRenderer lr;
     List<Vector2> points;
+    //Rigidbody2D rb;
     void Awake()
     {
         lr = GetComponent<LineRenderer>();
         edgecol = GetComponent<EdgeCollider2D>();
+       // rb = GetComponent<Rigidbody2D>();
     }
     public void UpdateLine(Vector2 Pos)
     {
@@ -29,7 +31,10 @@ public class Line : MonoBehaviour
         lr.positionCount = points.Count;
         lr.SetPosition(points.Count - 1, point);
         if (points.Count > 1)
+        {
             edgecol.points = points.ToArray();
+           
+        }
     }
 
 }

@@ -179,10 +179,11 @@ public class PlayerControl : MonoBehaviour
                 trailscript.enabled = true;
                 CameraShaker.Instance.ShakeOnce(4f, 7f, 0.2f, 0.4f);
                 dashRequest = true;
-                timeManager.DoSlowMotion();
+                //timeManager.DoSlowMotion();
+               // Time.timeScale = 1f;
                 source.clip = dashSound;
                 source.Play();
-                Debug.Log("Dash");
+                //Debug.Log("Dash");
 
             }
             
@@ -301,9 +302,10 @@ public class PlayerControl : MonoBehaviour
     {
         if (isGrounded)
         {
-            extraJump = extrajumpinput;
+           // if(!isIcing)
+                extraJump = extrajumpinput;
             if(restTimeForDash<=0)
-             extraDash = extraDashInput;
+                extraDash = extraDashInput;
           //  isdoubleJump = false;
             //trailscript.enabled = false;
 
