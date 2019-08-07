@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EZCameraShake;
+//using EZCameraShake;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -72,6 +72,8 @@ public class PlayerControl : MonoBehaviour
     //icing
     bool isIcing;
     public TimeManagerScript timeManager;
+    public CameraShakeNoise camShake;
+   [SerializeField] private GameObject dropEffect;
 
     // Use this for initialization
     void Start()
@@ -99,6 +101,10 @@ public class PlayerControl : MonoBehaviour
             if (yspeed < 0.5f)
             {
                 rb.gravityScale = startGravity + fallingGravity;
+            }
+            else
+            {
+                rb.gravityScale = startGravity;
             }
 
         }
@@ -177,7 +183,8 @@ public class PlayerControl : MonoBehaviour
                 restTimeForDash = restTimeForDashInput;
                 animP.SetTrigger("dash");
                 trailscript.enabled = true;
-                CameraShaker.Instance.ShakeOnce(4f, 7f, 0.2f, 0.4f);
+              //  CameraShaker.Instance.ShakeOnce(4f, 7f, 0.2f, 0.4f);
+              //////////////////////////////////////////////////////////////////////////////////////////////////////
                 dashRequest = true;
                 //timeManager.DoSlowMotion();
                // Time.timeScale = 1f;
@@ -316,15 +323,18 @@ public class PlayerControl : MonoBehaviour
                     source.clip = dropSound;
                     source.Play();
                 }
-
+                GameObject Gparticle = Instantiate(dropEffect,player.transform.position-new Vector3(0,0.5f,0),Quaternion.identity);
+                Destroy(Gparticle, 1f);
                // Debug.Log("drop");
                 
                 float shakeImpulse = Mathf.Min((Mathf.Abs(yspeed) / 10f), 4f);
-               // Debug.Log(yspeed);
-                if(yspeed==0)
-                    CameraShaker.Instance.ShakeOnce(4f, 7f, 0.2f, 0.4f);
+                // Debug.Log(yspeed);
+                if (yspeed == 0)
+                    camShake.Shake(0.2f,1.4f);
+                //    CameraShaker.Instance.ShakeOnce(4f, 7f, 0.2f, 0.4f);/////////////////////////////////////////////////////////////////////////////
                 else
-                CameraShaker.Instance.ShakeOnce(shakeImpulse, 7f, 0.2f, 0.4f);
+                    camShake.Shake(0.2f, shakeImpulse+0.2f); 
+               // CameraShaker.Instance.ShakeOnce(shakeImpulse, 7f, 0.2f, 0.4f);
                 if (yspeed < -6f)
                 {
                     animP.SetTrigger("hardDrop");

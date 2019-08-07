@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EZCameraShake;
+//using EZCameraShake;
 public class Enemy : MonoBehaviour {
     public int health;
     public GameObject burst;
@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour {
         GameObject blood = Instantiate(burst,transform.position,Quaternion.identity);
         Destroy(blood, 2f);
         Debug.Log("aah");
-        CameraShaker.Instance.ShakeOnce(2.5f, 2.5f, 0.1f, 1f);
+      //  CameraShaker.Instance.ShakeOnce(2.5f, 2.5f, 0.1f, 1f);
+      ///////////////////////////////
     }
 }

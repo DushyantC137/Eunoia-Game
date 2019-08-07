@@ -21,8 +21,9 @@ public class LineCreater : MonoBehaviour {
     public LayerMask whatIsGround;
     private GameObject lineGO;
     private bool isIcing;
-    [SerializeField]private float decreaseFluidRate=2f;
-    [SerializeField]private float increaseFluidRate=1f;
+    [SerializeField] private float decreaseFluidRate = 2f;
+    [SerializeField] private float increaseFluidRate = 1f;
+    [SerializeField] private bool isRegeneration=true;
     [Header("Unity Stuff")]
     public Image fluidsBar;
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class LineCreater : MonoBehaviour {
             activeLine1 = null;
             activeLine2 = null;
         }
-        if (!isIcing)
+        if (!isIcing&&isRegeneration)
         {
             IncreaseRateOfFluid();
         }
@@ -59,7 +60,7 @@ public class LineCreater : MonoBehaviour {
                 }
                 if (Input.GetMouseButtonUp(0))
                 {
-                    Debug.Log("yo");
+                   // Debug.Log("yo");
                     activeLine1 = null;
                     isIcing = false;
 

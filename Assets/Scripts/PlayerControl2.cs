@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EZCameraShake;
+//using EZCameraShake;
 
 public class PlayerControl2 : MonoBehaviour
 {
@@ -67,8 +67,8 @@ public class PlayerControl2 : MonoBehaviour
                 }
                 
                 ///animP.SetTrigger("drop");
-                float shakeImpulse = Mathf.Min((Mathf.Abs(yspeed) / 12f), 8f);
-                CameraShaker.Instance.ShakeOnce(shakeImpulse, 7f, 0.2f, 0.4f);
+              //  float shakeImpulse = Mathf.Min((Mathf.Abs(yspeed) / 12f), 8f);
+               // CameraShaker.Instance.ShakeOnce(shakeImpulse, 7f, 0.2f, 0.4f);////////////////////////////////////////////////////
                 isDrop = false;
             }
         }
