@@ -318,11 +318,10 @@ public class PlayerControl : MonoBehaviour
 
             if (isDrop)
             {
-                if (!isIcing)
-                {
-                    source.clip = dropSound;
-                    source.Play();
-                }
+               
+                 source.clip = dropSound;
+                 source.Play();
+                
                 GameObject Gparticle = Instantiate(dropEffect,player.transform.position-new Vector3(0,0.5f,0),Quaternion.identity);
                 Destroy(Gparticle, 1f);
                // Debug.Log("drop");
@@ -331,7 +330,7 @@ public class PlayerControl : MonoBehaviour
                 // Debug.Log(yspeed);
                 if (yspeed == 0)
                     camShake.Shake(0.2f,1.4f);
-                //    CameraShaker.Instance.ShakeOnce(4f, 7f, 0.2f, 0.4f);/////////////////////////////////////////////////////////////////////////////
+                
                 else
                     camShake.Shake(0.2f, shakeImpulse+0.2f); 
                // CameraShaker.Instance.ShakeOnce(shakeImpulse, 7f, 0.2f, 0.4f);
