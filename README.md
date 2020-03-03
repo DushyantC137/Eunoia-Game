@@ -5,4 +5,5 @@ Used line renderer under the player and added edge colliders to the lines produc
 ##### Created many Camera and Musical effects with C# Script in The Final Version
 Here is the one of its Levels:  **Also Added Lens Effect to the Level**  
 ![](Display.gif)
+
 Have a Story mode and an Arcade mode in the full version 
