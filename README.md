@@ -1,4 +1,4 @@
-# PsyBox-Game
+# Eunoia-Game
 Created a **2D platformer Game** in which the user can make its own Platforms during runtime.
 
 Used Line renderer under the player and added edge colliders to the lines produced.
